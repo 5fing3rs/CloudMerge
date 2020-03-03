@@ -1,0 +1,9 @@
+<h1>Upload Image</h1>
+
+<form action="{% url 'ioi:upload_image' %}" method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Submit">
+</form>
+
+<a href="/ioi">Back to IOI</a>

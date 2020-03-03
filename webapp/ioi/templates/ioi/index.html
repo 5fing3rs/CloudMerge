@@ -1,0 +1,18 @@
+<h2>
+	Upload an image
+</h2>
+<a href="{% url 'ioi:upload_image' %}">Upload Image Form</a>
+
+<h2>
+    Most recently uploaded images
+</h2>
+
+{% if latest_input_image_list %}
+    <ul>
+    {% for input_image in latest_input_image_list %}
+        <li><a href="{% url 'ioi:detail' input_image.input_id %}">{{ input_image.input_id }} - {{ input_image.input_image_2_url }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No images have been uploaded.</p>
+{% endif %}

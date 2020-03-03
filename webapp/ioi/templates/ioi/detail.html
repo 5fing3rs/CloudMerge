@@ -1,0 +1,21 @@
+<h2>
+	Image {{ input_image.input_id }}
+</h2>
+<p>The ID of the input is {{ input_image.input_id }}.</p>
+<p>Its calib is stored at {{ input_image.input_calib_url }}.</p>
+<p>Its image_2 is stored at {{ input_image.input_image_2_url }}.</p>
+<p>Its label_2 is stored at {{ input_image.input_label_2_url }}.</p>
+<p>Its velodyne is stored at {{ input_image.input_velodyne_url }}.</p>
+<p>It was uploaded at {{ input_image.input_upload_time }}.</p>
+
+<p><a href="/ioi">Back to IOI.</a></p>
+
+<form action="{% url 'ioi:detail' input_image.input_id %}", method="POST">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Process Image">
+</form>
+
+{% if process %}
+The output folder URL is {{ output_folder_url }}.
+{% endif %}
