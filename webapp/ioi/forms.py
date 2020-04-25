@@ -10,3 +10,9 @@ class UploadImageForm(forms.Form):
 
 class ProcessImageForm(forms.Form):
     output_folder_url = forms.CharField(label='Output folder URL', max_length=255)
+
+class UploadCloudForm(forms.Form):
+    input_cloud_url = forms.CharField(label='Input image cloud URL', max_length=255)
+
+class ProcessCloudForm(forms.Form):
+    output_folder_url = forms.CharField(label='Output folder URL', max_length=255)

@@ -1,18 +1,83 @@
-<h2>
-	Upload an image
-</h2>
-<a href="{% url 'ioi:upload_image' %}">Upload Image Form</a>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>5 Fing3rs</title>
+	</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</head>
+<style>
+	body {
+	  background: black;
+	}
 
-<h2>
-    Most recently uploaded images
-</h2>
+	th, td {
+        width: 90%;
+  padding: 20px;
+  text-align: left;
+}
 
-{% if latest_input_image_list %}
-    <ul>
-    {% for input_image in latest_input_image_list %}
-        <li><a href="{% url 'ioi:detail' input_image.input_id %}">{{ input_image.input_id }} - {{ input_image.input_image_2_url }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No images have been uploaded.</p>
-{% endif %}
+	.button {
+		position:relative;
+		left: 50%;
+	  background-color:black;
+	  border: none;
+	  color:white;
+	  padding: 7px 15px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  margin: 4px 2px;
+	  cursor: pointer;
+		box-shadow: inset 0px 0px 1px 1px black;
+	}
+	.content {
+		box-shadow: inset 0px 0px 10px 10px black;
+	  max-width: 90%;
+	  margin: auto;
+	  background: white;
+	  padding: 70px;
+	}
+</style>
+<body>
+<div class="container-fluid">
+	<hr id="hr-nav">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+	  <div class="collapse navbar-collapse" id="main-navbar">
+		<ul class="navbar-nav mr-auto navbar-center">
+			<li><a class="nav-link" href="/ioi">HOME</a></li>
+			<li><a class="nav-link" href="/ioi/upload_image">Image upload</a></li>
+			<li class="active"><a class="nav-link" href="/ioi/ioi">2D object detection</a></li>
+			<li><a class="nav-link" href="/ioi/upload_cloud">Cloud upload</a></li>
+			<li><a class="nav-link" href="/ioi/noise_index">Noise remove</a></li>
+			<li><a class="nav-link" href="/ioi/object_index">Object extraction</a></li>
+			<li><a class="nav-link" href="/ioi/seperation_index">Object Seperation</a></li>
+		</ul>
+	  </div>
+	</nav>
+	<hr id="hr-nav">
+  </div>
+	 <div class="bg-image"></div>
+	 <h1 align="center" style="color:white;"><strong>MOST RECENT UPLOADED IMAGES</strong></h1>
+	<div class="content">
+        <h2 align="center" style="color:black;"><strong> SELECT THE IMAGE TO DOWNLOAD</strong></h2>
+        {% if latest_input_image_list %}
+		<table border="7" align="center">
+        {% for input_image in latest_input_image_list %}
+            <tr><td><a href="{% url 'ioi:detail' input_image.input_id %}">{{ input_image.input_id }} - {{ input_image.input_image_2_url }}</a></td></tr>
+        {% endfor %}
+        </table>
+        {% else %}
+            <p>No images have been uploaded.</p>
+        {% endif %}
+	</div>
+</body>
+</html>

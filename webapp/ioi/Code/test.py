@@ -11,6 +11,9 @@ from ioi.Code.model import RPN3D
 from ioi.Code.config import cfg
 from ioi.Code.utils import *
 from ioi.Code.utils.kitti_loader import iterate_data, sample_test_data
+from ioi.Code.filter_noise import filter_noise
+from ioi.Code.filter_objects import *
+from ioi.Code.filter_downsampled_objects import *
 
 def IOI(input_calib_url,
         input_image_2_url,
@@ -78,4 +81,56 @@ def IOI(input_calib_url,
                     cv2.imwrite( front_img_path, front_image )
                     cv2.imwrite( bird_view_path, bird_view )
                     cv2.imwrite( heatmap_path, heatmap )
+
+def ND( input_cloud_2_url,output_folder_url):
+    INPUT_DATA_DIR = input_cloud_2_url
+    input_dir = input_cloud_2_url
+    OUTPUT_DATA_DIR = output_folder_url
+    reverse_input = input_dir[::-1]
+    name_input = reverse_input.partition("/")[0]
+    Input_file_name = name_input[::-1]
+        
+    if OUTPUT_DATA_DIR[len(OUTPUT_DATA_DIR)-1]=="/":
+        OUTPUT_DATA_DIR +=Input_file_name
+    else:
+        OUTPUT_DATA_DIR += "/"
+        OUTPUT_DATA_DIR += Input_file_name
+    print(INPUT_DATA_DIR)
+    print(OUTPUT_DATA_DIR)
+    filter_noise(INPUT_DATA_DIR , OUTPUT_DATA_DIR)
+
+def OD( input_cloud_2_url,output_folder_url):
+    INPUT_DATA_DIR = input_cloud_2_url
+    input_dir = input_cloud_2_url
+    OUTPUT_DATA_DIR = output_folder_url
+    reverse_input = input_dir[::-1]
+    name_input = reverse_input.partition("/")[0]
+    Input_file_name = name_input[::-1]
+        
+    if OUTPUT_DATA_DIR[len(OUTPUT_DATA_DIR)-1]=="/":
+        OUTPUT_DATA_DIR +=Input_file_name
+    else:
+        OUTPUT_DATA_DIR += "/"
+        OUTPUT_DATA_DIR += Input_file_name
+    print(INPUT_DATA_DIR)
+    print(OUTPUT_DATA_DIR)
+    filter_objects(INPUT_DATA_DIR , OUTPUT_DATA_DIR)
+
+def SD( input_cloud_2_url,output_folder_url):
+    INPUT_DATA_DIR = input_cloud_2_url
+    input_dir = input_cloud_2_url
+    OUTPUT_DATA_DIR = output_folder_url
+    reverse_input = input_dir[::-1]
+    name_input = reverse_input.partition("/")[0]
+    Input_file_name = name_input[::-1]
+        
+    if OUTPUT_DATA_DIR[len(OUTPUT_DATA_DIR)-1]=="/":
+        OUTPUT_DATA_DIR +=Input_file_name
+    else:
+        OUTPUT_DATA_DIR += "/"
+        OUTPUT_DATA_DIR += Input_file_name
+    print(INPUT_DATA_DIR)
+    print(OUTPUT_DATA_DIR)
+    filter_downsampled_objects(INPUT_DATA_DIR , OUTPUT_DATA_DIR)
+
 

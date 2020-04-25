@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>5 Fing3rs</title>
-
 	</style>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +16,15 @@
 	  background: black;
 	}
 
+	th, td {
+        width: 90%;
+  padding: 20px;
+  text-align: left;
+}
+
 	.button {
+		position:relative;
+		left: 50%;
 	  background-color:black;
 	  border: none;
 	  color:white;
@@ -47,35 +54,33 @@
 	</button>
 	  <div class="collapse navbar-collapse" id="main-navbar">
 		<ul class="navbar-nav mr-auto navbar-center">
-			<li><a class="nav-link" href="/ioi/ioi">Back</a></li>
-			<li class="active"><a class="nav-link" href="#">2D object detection</a></li>
-			</ul>
+			<li><a class="nav-link" href="/ioi">HOME</a></li>
+			<li><a class="nav-link" href="/ioi/upload_image">Image upload</a></li>
+			<li><a class="nav-link" href="/ioi/ioi">2D object detection</a></li>
+			<li><a class="nav-link" href="/ioi/upload_cloud">Cloud upload</a></li>
+			<li><a class="nav-link" href="/ioi/noise_index">Noise remove</a></li>
+			<li class="active"><a class="nav-link" href="/ioi/object_index">Object extraction</a></li>
+			<li><a class="nav-link" href="/ioi/seperation_index">Object Seperation</a></li>
+
+		</ul>
 	  </div>
 	</nav>
 	<hr id="hr-nav">
   </div>
 	 <div class="bg-image"></div>
-	 <h1 align="center" style="color:white;">
-		Image {{ input_image.input_id }}
-	</h1>
+	 <h1 align="center" style="color:white;"><strong>MOST RECENT UPLOADED CLOUD</strong></h1>
 	<div class="content">
-	<p style="font-size:20px"><strong>The ID of the input is: </strong> {{ input_image.input_id }}.</p>
-	<p style="font-size:20px"><strong>Its calib is stored at: </strong> {{ input_image.input_calib_url }}.</p>
-	<p style="font-size:20px"><strong>Its image_2 is stored at: </strong> {{ input_image.input_image_2_url }}.</p>
-	<p style="font-size:20px"><strong>Its label_2 is stored at: </strong> {{ input_image.input_label_2_url }}.</p>
-	<p style="font-size:20px"><strong>Its velodyne is stored at: </strong> {{ input_image.input_velodyne_url }}.</p>
-	<p style="font-size:20px"><strong>Was uploaded at: </strong> {{ input_image.input_upload_time }}.</p>
+        <h2 align="center" style="color:black;"><strong> SELECT THE CLOUD TO DOWNLOAD</strong></h2>
+        <h2 align="center" style="color:black;"><strong>OBJECTS IN THE CLOUD</strong></h2>
+        {% if latest_input_cloud_list %}
+		<table border="7" align="center">
+		{% for input_cloud in latest_input_cloud_list %}
+		<tr><td><a href="{% url 'ioi:object_detail' input_cloud.input_id %}">{{ input_cloud.input_id }} - {{ input_cloud.input_cloud_2_url }}</a></td></tr>	
+              {% endfor %}
+        </table>
+        {% else %}
+            <p>No images have been uploaded.</p>
+        {% endif %}
 	</div>
-	<div class="content">
-		<p style="font-size: 30px;">ENTER THE FOLDER URL WHERE YOU WANT TO STORE THE FILE</p>
-	<form action="{% url 'ioi:detail' input_image.input_id %}", method="POST">
-		{% csrf_token %}
-		{{ form.as_p }}
-		<input type="submit" value="Process Image" class="button">
-	</form>
-	</div>
-	{% if process %}
-	The output folder URL is {{ output_folder_url }}.
-	{% endif %}
 </body>
 </html>

@@ -39,39 +39,38 @@
 	}
 </style>
 <body>
-<div class="container-fluid">
-	<hr id="hr-nav">
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
-	  <span class="navbar-toggler-icon"></span>
-	</button>
-	  <div class="collapse navbar-collapse" id="main-navbar">
-		<ul class="navbar-nav mr-auto navbar-center">
-			<li><a class="nav-link" href="/ioi/ioi">Back</a></li>
-			<li class="active"><a class="nav-link" href="#">2D object detection</a></li>
+
+	<div class="container-fluid">
+		<hr id="hr-nav">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		  <div class="collapse navbar-collapse" id="main-navbar">
+			<ul class="navbar-nav mr-auto navbar-center">
+				<li><a class="nav-link" href="/ioi/noise_index">Back</a></li>
+				<li class="active"><a class="nav-link" href="#">Noise Remove</a></li>
 			</ul>
+		  </div>
+		</nav>
+		<hr id="hr-nav">
 	  </div>
-	</nav>
-	<hr id="hr-nav">
-  </div>
 	 <div class="bg-image"></div>
 	 <h1 align="center" style="color:white;">
-		Image {{ input_image.input_id }}
+		Cloud {{ input_cloud.input_id }}
 	</h1>
 	<div class="content">
-	<p style="font-size:20px"><strong>The ID of the input is: </strong> {{ input_image.input_id }}.</p>
-	<p style="font-size:20px"><strong>Its calib is stored at: </strong> {{ input_image.input_calib_url }}.</p>
-	<p style="font-size:20px"><strong>Its image_2 is stored at: </strong> {{ input_image.input_image_2_url }}.</p>
-	<p style="font-size:20px"><strong>Its label_2 is stored at: </strong> {{ input_image.input_label_2_url }}.</p>
-	<p style="font-size:20px"><strong>Its velodyne is stored at: </strong> {{ input_image.input_velodyne_url }}.</p>
-	<p style="font-size:20px"><strong>Was uploaded at: </strong> {{ input_image.input_upload_time }}.</p>
+	<p style="font-size:20px"><strong>The ID of the input is: </strong> {{ input_cloud.input_id }}.</p>
+	<p style="font-size:20px"><strong>Point cloud is stored at: </strong> {{ input_cloud.input_cloud_2_url }}.</p>
+	<p style="font-size:20px"><strong>Was uploaded at: </strong> {{ input_cloud.input_upload_time }}.</p>
 	</div>
 	<div class="content">
 		<p style="font-size: 30px;">ENTER THE FOLDER URL WHERE YOU WANT TO STORE THE FILE</p>
-	<form action="{% url 'ioi:detail' input_image.input_id %}", method="POST">
+	<form action="{% url 'ioi:noise_detail' input_cloud.input_id %}", method="POST">
 		{% csrf_token %}
 		{{ form.as_p }}
 		<input type="submit" value="Process Image" class="button">
+
 	</form>
 	</div>
 	{% if process %}
